@@ -49,7 +49,6 @@
     PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
 
-
     protected override void OnInitialized()
     {
         List<DummyData> data = new List<DummyData>()
@@ -83,7 +82,7 @@
 
     private Task OpenDialogAsync()
     {
-        return DialogService.ShowAsync<AssetCategoryType_dialog>("Add Data");
+        return DialogService.ShowAsync<AssetCategoryType_dialog>("Add Asset Category");
     }
 
 }

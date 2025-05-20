@@ -40,10 +40,9 @@
                     {
                         <FluentGridItem lg="12" xs="12" md="12">
                             <div class="input-group">
-                                <FluentLabel For="@($"Type{type.Index}")" Class="mb-2 me-2">Type @type.Index:</FluentLabel>
-                                <FluentTextField Style="width:80%;"
+                                <FluentTextField Style="width:90%;"
                                 Id="@($"Type{type.Index}")"
-                                Placeholder="type here.."
+                                Placeholder="@($"Type {type.Index}")"
                                 @bind-Value="@type.Value"
                                 Required />
                                 <FluentButton Appearance="Appearance.Outline"
@@ -60,7 +59,7 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="MudBlazor.Color.Primary" OnClick="Submit">Ok</MudButton>
+        <MudButton Color="MudBlazor.Color.Primary" OnClick="Submit">Save</MudButton>
     </DialogActions>
 </MudDialog>
 
