@@ -1,0 +1,34 @@
+﻿
+@using System
+@using System.Collections.Generic
+
+<FluentPaginator State="State" />
+<div class="input-group">
+
+    <label>Items per page:</label>
+    <select @onchange="OnItemsPerPageChanged" class="form-select form-select-sm mx-1" style="max-width:70px;">
+        @foreach (var size in PageSizeOptions)
+        {
+            <option value="@size" selected="@(size == State.ItemsPerPage)">
+                @size
+            </option>
+        }
+    </select>
+</div>
+
+@code {
+    [Parameter] public PaginationState State { get; set; } = default!;
+    [Parameter] public EventCallback<int> OnPageSizeChanged { get; set; }
+
+    private int[] PageSizeOptions = new[] { 1, 25, 50, 100 };
+
+    private async Task OnItemsPerPageChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int newSize))
+        {
+            State.ItemsPerPage = newSize;
+            await State.SetCurrentPageIndexAsync(0);
+            await OnPageSizeChanged.InvokeAsync(newSize);
+        }
+    }
+}

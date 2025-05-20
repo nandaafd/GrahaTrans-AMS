@@ -1,0 +1,18 @@
+﻿@using MudBlazor
+<FluentGridItem xs="12" sm="12" md="12" lg="4">
+    <div class="card px-2 py-2" style="height:400px;color: var(--neutral-foreground-rest); background:var(--neutral-fill-layer-rest);">
+        <div class="my-2 text-primary" style="font-size:16px; cursor:pointer;">Total Asset <i class="bi bi-printer"></i></div>
+        <div style="height:100%; overflow:scroll;">
+            <MudChart ChartType="ChartType.Donut"b InputData="@data" InputLabels="@labels" Class="mx-auto">
+                <CustomGraphics>
+                    <text class="donut-inner-text" x="50%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="20">Total</text>
+                    <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="50">@data.Sum().ToString()</text>
+                </CustomGraphics>
+            </MudChart>
+        </div>
+    </div>
+</FluentGridItem>
+@code {
+    public double[] data = { 25, 77, 28, 5, 2, 4, 5, 3, 4, 5, 6, 7 };
+    public string[] labels = { "Elektronik", "Computer", "Furniture", "Mobil", "Motor", "Ac", "Printer", "Monitor", "Mesin Las", "Tire Changer", "Apar", "Kompresor", };
+}

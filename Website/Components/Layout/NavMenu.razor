@@ -1,0 +1,72 @@
+﻿@rendermode InteractiveServer
+
+<div class="navmenu">
+    <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
+    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
+    <nav class="sitenav" aria-labelledby="main-menu">
+        <FluentNavMenu Id="main-menu" Collapsible="false" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
+            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
+
+            <FluentDivider />
+            <div style="margin:10px 12px; font-weight:600;">Assets</div>
+            <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size20.Box())" IconColor="Color.Accent">Fixed Asset</FluentNavLink>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.BuildingBank())" IconColor="Color.Accent">Rent Asset</FluentNavLink>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.VehicleTruckProfile())" IconColor="Color.Accent">Vehicle Asset</FluentNavLink>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.BoxMultipleArrowRight())" IconColor="Color.Accent">Mutation</FluentNavLink>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.BoxCheckmark())" IconColor="Color.Accent">Finished Asset</FluentNavLink>
+
+            <FluentDivider/>
+            <div style="margin:10px 12px; font-weight:600;">Assets Monitoring</div>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.ChartMultiple())" IconColor="Color.Accent">Monitoring Asset</FluentNavLink>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.WrenchScrewdriver())" IconColor="Color.Accent">Service Asset</FluentNavLink>
+
+            <FluentDivider />
+            <div style="margin:10px 12px; font-weight:600;">Purchase Assets</div>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.ChannelAdd())" IconColor="Color.Accent">Procurement</FluentNavLink>
+            <FluentNavGroup Title="Purchase Request" Icon="@(new Icons.Regular.Size20.ShoppingBagAdd())" IconColor="Color.Accent">
+                <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Request</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Approval</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Purchase Order" Icon="@(new Icons.Regular.Size20.Cart())" IconColor="Color.Accent">
+                <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Request</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Approval</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.BoxMultipleCheckmark())" IconColor="Color.Accent">Receive Asset</FluentNavLink>
+
+            <FluentDivider />
+            <div style="margin:10px 12px; font-weight:600;">Payment & Invoice</div>
+            <FluentNavGroup Title="Invoice" Icon="@(new Icons.Regular.Size20.DocumentBulletList())" IconColor="Color.Accent">
+                <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Request</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Approval</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Payment" Icon="@(new Icons.Regular.Size20.MoneyCalculator())" IconColor="Color.Accent">
+                <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Request</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Approval</FluentNavLink>
+            </FluentNavGroup>
+
+            <FluentDivider />
+            <div style="margin:10px 12px; font-weight:600;">Utility</div>
+            <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size20.DataBarVerticalArrowDown())" IconColor="Color.Accent">Depreciation</FluentNavLink>
+
+            <FluentDivider />
+            <div style="margin:10px 12px; font-weight:600;">Master Tables</div>
+            <FluentNavGroup Title="Table Assets" Icon="@(new Icons.Regular.Size20.DocumentTable())" IconColor="Color.Accent">
+                <FluentNavLink Href="master/asset_category" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Asset Category & Type</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Approval</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Table General" Icon="@(new Icons.Regular.Size20.DocumentTableArrowRight())" IconColor="Color.Accent">
+                <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Request</FluentNavLink>
+                <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size12.CaretRight())" IconColor="Color.Accent">Approval</FluentNavLink>
+            </FluentNavGroup>
+
+            <FluentDivider />
+            <div style="margin:10px 12px; font-weight:600;">Administration</div>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.PersonLock())" IconColor="Color.Accent">Users Management</FluentNavLink>
+            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.ClipboardCode())" IconColor="Color.Accent">Error Logs</FluentNavLink>
+        </FluentNavMenu>
+    </nav>
+</div>
+
+@code {
+    private bool expanded = true;
+}

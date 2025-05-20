@@ -1,0 +1,23 @@
+﻿@implements IDialogContentComponent
+
+<FluentDesignTheme 
+    @bind-Mode="@Mode" 
+    @bind-OfficeColor="@Color" 
+    StorageName="theme"/>
+<FluentSelect
+    Label="Theme"
+              Style="margin-bottom: 30px;"
+    Items="@(Enum.GetValues<DesignThemeModes>())" 
+    @bind-SelectedOption="@Mode"/>
+<FluentSelect 
+    Label="Color"
+              Width="100%"
+              Height="200px"
+    Items="@(OfficeColorUtilities.AllColors.Cast<OfficeColor?>())"
+    @bind-SelectedOption="@Color" />
+
+@code {
+    public DesignThemeModes Mode = DesignThemeModes.System;
+    private OfficeColor? Color = OfficeColor.Windows;
+
+}

@@ -1,0 +1,74 @@
+﻿@inject IDialogService DialogService
+
+<FluentHeader Class="header">
+    <div>
+        <img src="images/logo_ams_light.png" style="max-width:140px;" class="img-fluid" alt="Alternate Text" />
+    </div>
+    <FluentSpacer></FluentSpacer>
+    <FluentSearch Id="searchBox" Style="margin-right:15px;" AriaLabel="Search" Placeholder="Type to search AssetNo"/>
+    <FluentIcon Style="margin-right:10px;" Id="searchBtn" Value="@(new Icons.Regular.Size20.Search())" Color="Color.Lightweight" OnClick="@ShowSearchAsync" />
+    <FluentIcon Style="margin-right:10px;" Value="@(new Icons.Regular.Size20.Person())" Color="Color.Lightweight" OnClick="@ShowProfileAsync" />
+    <FluentIcon Style="margin-right:10px;" Value="@(new Icons.Regular.Size20.Alert())" Color="Color.Lightweight" OnClick="@ShowNotificationAsync" />
+    <FluentIcon Value="@(new Icons.Regular.Size20.Settings())" Color="Color.Lightweight" OnClick="@ShowSettingsAsync" />
+</FluentHeader>
+<style>
+    .header{
+        flex-shrink:0;
+        z-index: 10000;
+        
+    }
+    #searchBox{
+        background-color:transparent;
+    }
+    @@media (max-width: 768px) {
+        #searchBox{
+            display:none;
+        }
+    }
+
+    @@media (min-width: 768px) {
+        #searchBtn {
+            display: none;
+        }
+    }
+</style>
+@code
+{
+
+    private async Task ShowSettingsAsync()
+    {
+        await DialogService.ShowPanelAsync<Layout.Partials.Settings>(new DialogParameters()
+            {
+                Title = "Settings",
+                Alignment = HorizontalAlignment.Right,
+                SecondaryAction = null,
+            });
+    }
+    private async Task ShowNotificationAsync()
+    {
+        await DialogService.ShowPanelAsync<Layout.Partials.Notification>(new DialogParameters()
+            {
+                Title = "Notification",
+                Alignment = HorizontalAlignment.Right,
+                SecondaryAction = null,
+            });
+    }
+    private async Task ShowProfileAsync()
+    {
+        await DialogService.ShowPanelAsync<Layout.Partials.Profile>(new DialogParameters()
+            {
+                Title = "Profile",
+                Alignment = HorizontalAlignment.Right,
+                SecondaryAction = null,
+            });
+    }
+    private async Task ShowSearchAsync()
+    {
+        await DialogService.ShowPanelAsync<Layout.Partials.Search>(new DialogParameters()
+            {
+                Title = "Search",
+                Alignment = HorizontalAlignment.Right,
+                SecondaryAction = null,
+            });
+    }
+}

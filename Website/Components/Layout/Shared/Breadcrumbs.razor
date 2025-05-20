@@ -1,0 +1,35 @@
+﻿<FluentGrid Class="my-3">
+    <FluentGridItem lg="6">
+        <FluentBreadcrumb>
+            @foreach (var item in Items)
+            {
+                <FluentBreadcrumbItem Href="@item.Href">
+                    @if (item.Icon != null)
+                    {
+                        <FluentIcon Value="@((Icon)item.Icon)" Slot="start" />
+                    }
+                    @item.Text
+                </FluentBreadcrumbItem>
+            }
+        </FluentBreadcrumb>
+    </FluentGridItem>
+    @if (IncludeDate)
+    {
+        <FluentGridItem lg="6" Justify="JustifyContent.FlexEnd">
+            <div class="d-flex justify-content-end">@DateTime.Today.ToString("dddd, dd MMMM yyyy")</div>
+        </FluentGridItem>
+    }
+</FluentGrid>
+@code {
+    [Parameter]
+    public List<BreadcrumbModel> Items { get; set; } = new();
+    [Parameter]
+    public bool IncludeDate { get; set; } = false;
+
+    public class BreadcrumbModel
+    {
+        public string Text { get; set; }
+        public string Href { get; set; }
+        public object Icon { get; set; }
+    }
+}

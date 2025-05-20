@@ -1,0 +1,22 @@
+﻿@page "/"
+@using MudBlazor
+@using Website.Components.Layout.Shared
+
+<Breadcrumbs Items="GetBreadcrumbs()" IncludeDate="true"/>
+<DataWidgets></DataWidgets>
+
+<FluentGrid Class="mt-3">
+    <DonutChart></DonutChart>
+    <SummaryTable></SummaryTable>
+</FluentGrid>
+@code
+{
+    private List<Breadcrumbs.BreadcrumbModel> GetBreadcrumbs()
+    {
+        return new()
+        {
+            new Breadcrumbs.BreadcrumbModel { Text = "Home", Icon = new Icons.Regular.Size16.Home() },
+            new Breadcrumbs.BreadcrumbModel { Text = "Summary", Icon = new Icons.Regular.Size16.ChartMultiple() },
+        };
+    }
+}

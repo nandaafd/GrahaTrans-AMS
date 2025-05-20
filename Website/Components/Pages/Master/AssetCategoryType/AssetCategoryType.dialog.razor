@@ -1,0 +1,95 @@
+﻿@using MudBlazor
+<MudDialog Class="w-100 h-100" Style="background-color:var(--neutral-fill-layer-rest); color: var(--neutral-foreground-rest);">
+    <DialogContent>
+        <div class="card mb-3" style="background-color:var(--neutral-fill-layer-rest); color: var(--neutral-foreground-rest);">
+            <div class="card-header">Category Asset</div>
+            <div class="card-body">
+
+                <FluentGrid>
+                    <FluentGridItem lg="12" xs="12" md="12">
+                        <div class="input-group">
+                            <FluentLabel For="firstName" Class="mb-2">Category Name:*</FluentLabel>
+                            <FluentTextField Class="w-100" id="firstName" 
+                            Placeholder="Enter category name" Required/>
+                        </div>
+                    </FluentGridItem>
+                    <FluentGridItem lg="12" xs="12" md="12">
+                        <div class="input-group">
+                            <FluentLabel For="firstName" Class="mb-2">Description:</FluentLabel>
+                            <FluentTextArea Class="w-100" id="description"
+                            Placeholder="type description" Required />
+                        </div>
+                    </FluentGridItem>
+                    <FluentGridItem lg="12" xs="12" md="12">
+                        <div class="input-group">
+                            <FluentLabel For="Status" Class="mb-2">Status:</FluentLabel>
+                            <FluentSelect TOption=string Id="Status" Class="w-100">
+                                <FluentOption Class="ps-2" Selected="true" Value="active">Active</FluentOption>
+                                <FluentOption Class="ps-2" Value="nonactive">NonActive</FluentOption>
+                            </FluentSelect>
+                        </div>
+                    </FluentGridItem>
+                </FluentGrid>
+            </div>
+        </div>
+        <div class="card" style="background-color:var(--neutral-fill-layer-rest); color: var(--neutral-foreground-rest);">
+            <div class="card-header">Types of category</div>
+            <div class="card-body">
+                <FluentGrid Class="mb-3">
+                    @foreach (var type in typeList)
+                    {
+                        <FluentGridItem lg="12" xs="12" md="12">
+                            <div class="input-group">
+                                <FluentLabel For="@($"Type{type.Index}")" Class="mb-2 me-2">Type @type.Index:</FluentLabel>
+                                <FluentTextField Style="width:80%;"
+                                Id="@($"Type{type.Index}")"
+                                Placeholder="type here.."
+                                @bind-Value="@type.Value"
+                                Required />
+                                <FluentButton Appearance="Appearance.Outline"
+                                IconStart="@(new Icons.Regular.Size16.Delete())"
+                                OnClick="@(() => RemoveType(type))"></FluentButton>
+                            </div>
+                        </FluentGridItem>
+                    }
+                </FluentGrid>
+                <FluentButton IconStart="@(new Icons.Regular.Size16.Add())" OnClick="@AddType">Add Type</FluentButton>
+            </div>
+        </div>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="MudBlazor.Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudBlazor.IMudDialogInstance MudDialog { get; set; }
+
+    private void Submit() => MudDialog.Close(MudBlazor.DialogResult.Ok(true));
+
+    private void Cancel() => MudDialog.Cancel();
+    private List<TypeModel> typeList = new List<TypeModel> { new TypeModel { Index = 1, Value = "" } };
+
+    private void AddType()
+    {
+        var newIndex = typeList.Count + 1;
+        typeList.Add(new TypeModel { Index = newIndex, Value = "" });
+    }
+
+    private void RemoveType(TypeModel type)
+    {
+        if (typeList.Count > 1)
+        {
+            typeList.Remove(type);
+        }
+    }
+
+    private class TypeModel
+    {
+        public int Index { get; set; }
+        public string Value { get; set; }
+    }
+}

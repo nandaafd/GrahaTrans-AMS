@@ -1,0 +1,89 @@
+﻿@page "/master/asset_category"
+@using Website.Components.Layout.Shared
+@using Microsoft.FluentUI.AspNetCore.Components
+@inject MudBlazor.IDialogService DialogService
+
+
+<Breadcrumbs Items="GetBreadcrumbItem()" IncludeDate="true"/>
+<div>
+    <div class="card" style="background-color:var(--neutral-fill-layer-rest); color: var(--neutral-foreground-rest);">
+        <div class="card-header">
+            <div class="">Master Asset Category</div>
+        </div>
+        <div class="card-body">
+            <FluentStack Class="mb-2">
+                <FluentButton IconStart="@(new Icons.Regular.Size16.Add())" Appearance="Appearance.Accent" OnClick="OpenDialogAsync"> Add </FluentButton>
+                <FluentSpacer />
+                <FluentSelect TOption=string>
+                    <FluentOption Class="ps-2" Selected="true" Value="active">Active</FluentOption>
+                    <FluentOption Class="ps-2" Value="nonactive">NonActive</FluentOption>
+                </FluentSelect>
+                <FluentSearch Placeholder="search name"></FluentSearch>
+            </FluentStack>
+            <div id="datagrid-container" @key="pagination.ItemsPerPage">
+                <FluentDataGrid Items="items!.AsQueryable()"
+                Pagination="@pagination"
+                RowSize="@rowSize"
+                AutoItemsPerPage="false"
+                Style="overflow-y:hidden;">
+                    <PropertyColumn Property="@(c => c.No)" Sortable="true" />
+                    <PropertyColumn Property="@(c => c.CategoryName)" Sortable="true" />
+                    <PropertyColumn Property="@(c => c.Status)" Sortable="true" />
+                </FluentDataGrid>
+            </div>
+
+            <CustomPaginator State="@pagination" OnPageSizeChanged="OnItemsPerPageChanged"></CustomPaginator>
+
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private List<DummyData> dummyData = new();
+    private FluentMenuButton menuButton = new();
+    DataGridRowSize rowSize = DataGridRowSize.Small;
+    IQueryable<DummyData>? items;
+
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+
+
+    protected override void OnInitialized()
+    {
+        List<DummyData> data = new List<DummyData>()
+        {
+            new DummyData { No = 1, CategoryName = "Elektronik", Status = "Active"},
+            new DummyData { No = 2, CategoryName = "Kendaraan", Status = "Active"},
+        };
+        items = data.AsQueryable();
+    }
+    private List<Breadcrumbs.BreadcrumbModel> GetBreadcrumbItem()
+    {
+        return new()
+        {
+            new Breadcrumbs.BreadcrumbModel { Text = "Master", Icon = new Icons.Regular.Size16.DocumentTable() },
+            new Breadcrumbs.BreadcrumbModel { Text = "Asset Category and Type", Href = "/master/asset_category", Icon = new Icons.Regular.Size16.TabGroup() },
+        };
+    }
+    private void OnItemsPerPageChanged(int newSize)
+    {
+        pagination.ItemsPerPage = newSize;
+        pagination.SetCurrentPageIndexAsync(0);
+
+        StateHasChanged();
+    }
+    public class DummyData
+    {
+        public int No { get; set; }
+        public string CategoryName { get; set; }
+        public string Status { get; set; }
+    }
+
+    private Task OpenDialogAsync()
+    {
+        return DialogService.ShowAsync<AssetCategoryType_dialog>("Add Data");
+    }
+
+}
